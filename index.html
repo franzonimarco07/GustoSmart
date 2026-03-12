@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
@@ -358,9 +358,14 @@
         }
 
         function renderFiltri() {
-        const categorie = ["Tutti", "Antipasto", "Primo", "Secondo", "Dolce"];
+        // Aggiungi "Torte" alla lista qui sotto
+        const categorie = ["Tutti", "Antipasto", "Primo", "Secondo", "Dolce", "Torte"];
+    
         document.getElementById('home-category-filters').innerHTML = categorie.map(cat => `
-        <button onclick="setCategory('${cat}')" class="category-pill px-6 py-3 rounded-2xl font-bold text-xs bg-white ${filtroCategoriaAttivo === cat ? 'active' : ''}">${cat.toUpperCase()}</button>`).join('');
+        <button onclick="setCategory('${cat}')" 
+                class="category-pill px-6 py-3 rounded-2xl font-bold text-xs bg-white ${filtroCategoriaAttivo === cat ? 'active' : ''}">
+            ${cat.toUpperCase()}
+        </button>`).join('');
         }
 
         function setCategory(cat) { filtroCategoriaAttivo = cat; renderFiltri(); aggiornaUI(); }
@@ -500,3 +505,4 @@
 </body>
 
 </html>
+
