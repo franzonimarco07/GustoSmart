@@ -462,16 +462,48 @@
         }
     }
 
-        function filtraPerFrigo() {
-        const selezionati = Array.from(document.querySelectorAll('.ingredient-checkbox:checked')).map(cb => cb.value.toLowerCase());
-        if(selezionati.length === 0) { aggiornaUI(); naviga('home'); return; }
-        const filtrate = tutteLeRicette.filter(r => {
-        const content = (r.title + " " + (r.ingredients_simple || []).join(" ") + " " + (r.ingredients || []).join(" ")).toLowerCase();
-        return selezionati.some(s => content.includes(s));
-        });
-        renderCards(filtrate, 'home-recipes');
-        naviga('home');
-        }
+    function filtraPerFrigo() {
+    // 1. Prendo gli ingredienti che l'utente ha selezionato (es: ['uova'])
+    let selezionati = Array.from(document.querySelectorAll('.ingredient-checkbox:checked')).map(cb => cb.value.toLowerCase());
+    
+    if(selezionati.length === 0) { 
+        aggiornaUI(); 
+        naviga('home'); 
+        return; 
+    }
+
+    // 2. Creo una lista estesa di termini di ricerca
+    let terminiRicerca = [...selezionati];
+
+    // LOGICA SINONIMI: Se selezioni uova, aggiungo i derivati
+    if (selezionati.includes('uova')) {
+        terminiRicerca.push('tuorlo', 'tuorli', 'albume', 'albumi', 'uovo');
+    }
+    
+    // Esempio extra: se selezioni farina, cerca anche amidi
+    if (selezionati.includes('farina')) {
+        terminiRicerca.push('fecola', 'amido', 'maizena');
+    }
+
+    // 3. Filtro le ricette
+    const filtrate = tutteLeRicette.filter(r => {
+        // Unisco tutto il testo della ricetta in una stringa unica
+        const contenutoRicetta = (
+            r.title + " " + 
+            (r.ingredients_simple || []).join(" ") + " " + 
+            (r.ingredients || []).join(" ") + " " +
+            (r.description || "")
+        ).toLowerCase();
+
+        // Controllo se nella ricetta esiste ALMENO uno dei termini della lista estesa
+        return terminiRicerca.some(termine => contenutoRicetta.includes(termine));
+    });
+
+    // 4. Mostro i risultati
+    renderCards(filtrate, 'home-recipes');
+    naviga('home');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
         function aggiornaUI() {
         const f = tutteLeRicette.filter(r => filtroCategoriaAttivo === "Tutti" || r.category === filtroCategoriaAttivo);
@@ -505,5 +537,6 @@
 </body>
 
 </html>
+
 
 
