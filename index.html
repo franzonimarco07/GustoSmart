@@ -519,63 +519,74 @@
         }).join('');
         }
 
-        function apriRicetta(id) {
-        const r = tutteLeRicette.find(item => item.id == id);
-        if(!r) return;
-        const isFav = preferiti.includes(r.id.toString());
+function apriRicetta(id) {
+    const r = tutteLeRicette.find(item => item.id == id);
+    if(!r) return;
+    const isFav = preferiti.includes(r.id.toString());
 
-        document.getElementById('bottom-nav').style.display = 'none'; // Nascondi nav
-        document.getElementById('recipe-modal').classList.remove('hidden');
-        document.getElementById('modal-content').innerHTML = `
-        <div class="fixed top-6 left-6 z-[3100]">
+    // --- AGGIUNTA CRONOLOGIA ---
+    history.pushState({ popup: 'recipe-detail' }, "", "");
+    // ---------------------------
+
+    document.getElementById('bottom-nav').style.display = 'none'; 
+    document.getElementById('recipe-modal').classList.remove('hidden');
+    document.getElementById('modal-content').innerHTML = `
+    <div class="fixed top-6 left-6 z-[3100]">
         <button onclick="chiudiRicetta()" class="bg-white/80 backdrop-blur-md w-12 h-12 rounded-full flex items-center justify-center text-black shadow-lg active:scale-90 transition-all">
-        <i class="fa-solid fa-chevron-left"></i>
+            <i class="fa-solid fa-chevron-left"></i>
         </button>
-        </div>
-        <div class="fixed top-6 right-6 z-[3100] flex gap-3">
+    </div>
+    <div class="fixed top-6 right-6 z-[3100] flex gap-3">
         <button onclick="condividiRicetta('${r.title.replace(/'/g, "\\'")}')" class="bg-white/80 backdrop-blur-md w-12 h-12 rounded-full flex items-center justify-center text-black shadow-lg active:scale-90 transition-all">
-        <i class="fa-solid fa-share-nodes"></i>
+            <i class="fa-solid fa-share-nodes"></i>
         </button>
         <button onclick="toggleLike('${r.id}', event)" class="bg-white/80 backdrop-blur-md w-12 h-12 rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-all">
-        <i class="${isFav ? 'fa-solid text-red-500' : 'fa-regular text-slate-400'} fa-heart"></i>
+            <i class="${isFav ? 'fa-solid text-red-500' : 'fa-regular text-slate-400'} fa-heart"></i>
         </button>
-        </div>
-        <div class="relative h-[450px]">
+    </div>
+    <div class="relative h-[450px]">
         <img src="${r.image_url}" class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
         <div class="absolute bottom-12 px-8">
-        <p class="text-orange-400 font-bold text-xs uppercase tracking-widest mb-2">${r.category || 'Ricetta'}</p>
-        <h2 class="text-4xl font-black text-white leading-tight">${r.title}</h2>
+            <p class="text-orange-400 font-bold text-xs uppercase tracking-widest mb-2">${r.category || 'Ricetta'}</p>
+            <h2 class="text-4xl font-black text-white leading-tight">${r.title}</h2>
         </div>
-        </div>
-        <div class="px-8 pb-20 pt-10 bg-white rounded-t-[40px] -mt-10 relative z-10">
+    </div>
+    <div class="px-8 pb-20 pt-10 bg-white rounded-t-[40px] -mt-10 relative z-10">
         <div class="flex gap-4 mb-10">
-        <div class="flex-1 bg-slate-50 p-5 rounded-[30px] text-center border border-slate-100">
-        <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1">Preparazione</p>
-        <p class="font-black">${r.prep_time}</p>
-        </div>
-        <div class="flex-1 bg-slate-50 p-5 rounded-[30px] text-center border border-slate-100">
-        <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1">Dosi</p>
-        <p class="font-black">${r.servings || 2} Pers.</p>
-        </div>
+            <div class="flex-1 bg-slate-50 p-5 rounded-[30px] text-center border border-slate-100">
+                <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1">Preparazione</p>
+                <p class="font-black">${r.prep_time}</p>
+            </div>
+            <div class="flex-1 bg-slate-50 p-5 rounded-[30px] text-center border border-slate-100">
+                <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1">Dosi</p>
+                <p class="font-black">${r.servings || 2} Pers.</p>
+            </div>
         </div>
         <h3 class="text-xl font-black mb-6">Ingredienti</h3>
         <div class="space-y-3 mb-10">
-        ${(r.ingredients || []).map(i => `
-        <div class="bg-slate-50 p-5 rounded-2xl font-bold text-sm flex items-center gap-4 border border-slate-100">
-        <div class="w-2 h-2 bg-orange-500 rounded-full"></div> ${i}
-        </div>
-        `).join('')}
+            ${(r.ingredients || []).map(i => `
+            <div class="bg-slate-50 p-5 rounded-2xl font-bold text-sm flex items-center gap-4 border border-slate-100">
+                <div class="w-2 h-2 bg-orange-500 rounded-full"></div> ${i}
+            </div>
+            `).join('')}
         </div>
         <h3 class="text-xl font-black mb-4">Istruzioni</h3>
         <p class="text-slate-500 leading-relaxed whitespace-pre-wrap pb-10">${r.description}</p>
-        </div>`;
-        }
+    </div>`;
+}
 
-        function chiudiRicetta() {
-        document.getElementById('recipe-modal').classList.add('hidden');
-        document.getElementById('bottom-nav').style.display = 'flex';
-        }
+function chiudiRicetta() {
+    document.getElementById('recipe-modal').classList.add('hidden');
+    document.getElementById('bottom-nav').style.display = 'flex';
+
+    // --- AGGIUNTA CRONOLOGIA ---
+    // Se l'utente chiude col tasto X (chevron-left), dobbiamo dire al browser 
+    // di tornare indietro di uno, altrimenti il "fantasma" del pushState resta lì
+    if (history.state?.popup === 'recipe-detail') {
+        history.back();
+    }
+}
 
         function toggleLike(id, event) {
         if(event) event.stopPropagation();
@@ -828,6 +839,31 @@ function toggleSettings(show) {
 
         // Avvia il controllo al caricamento della pagina
         window.addEventListener('load', checkUpdate);
+
+        window.addEventListener('popstate', (event) => {
+    const modalRicetta = document.getElementById('recipe-modal');
+    const settingsPage = document.getElementById('settings-page');
+
+    // Se il dettaglio ricetta è aperto, chiudilo (senza richiamare history.back() perché ci siamo già)
+    if (modalRicetta && !modalRicetta.classList.contains('hidden')) {
+        modalRicetta.classList.add('hidden');
+        document.getElementById('bottom-nav').style.display = 'flex';
+        return;
+    }
+
+    // Se le impostazioni sono aperte, chiudile
+    if (settingsPage && !settingsPage.classList.contains('hidden')) {
+        toggleSettings(false);
+        return;
+    }
+
+    // Altrimenti gestisci la navigazione tra le pagine (Home, Dispensa, ecc)
+    if (event.state && event.state.page) {
+        naviga(event.state.page, false);
+    } else {
+        naviga('home', false);
+    }
+});
 
         window.onload = init;
     </script>
