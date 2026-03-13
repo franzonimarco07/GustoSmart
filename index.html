@@ -34,19 +34,28 @@
             padding-bottom: 160px;
         }
 
-        .page.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
+            .page.active {
+                display: block;
+                animation: fadeIn 0.3s ease;
+            }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .top-bar {
             position: fixed;
-            top: 0; left: 0; right: 0;
+            top: 0;
+            left: 0;
+            right: 0;
             height: 80px;
             background: rgba(248, 249, 251, 0.9);
             backdrop-filter: blur(20px);
@@ -58,10 +67,14 @@
         }
 
         .round-label {
-            width: 55px; height: 55px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            background: white; border: 1.5px solid #F1F5F9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 1.5px solid #F1F5F9;
             transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
@@ -71,29 +84,51 @@
             transform: scale(1.1);
         }
 
-        .ingredient-checkbox:checked + .round-label i { color: white; }
+            .ingredient-checkbox:checked + .round-label i {
+                color: white;
+            }
 
         .nav-container {
             position: fixed;
-            bottom: 20px; left: 50%;
+            bottom: 20px;
+            left: 50%;
             transform: translateX(-50%);
-            width: 85%; max-width: 380px;
+            width: 85%;
+            max-width: 380px;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border-radius: 28px;
             border: 1px solid rgba(255,255,255,0.5);
-            display: flex; justify-content: space-around;
-            padding: 10px; z-index: 1000;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            z-index: 1000;
             box-shadow: 0 15px 30px rgba(0,0,0,0.08);
         }
 
-        .nav-item i { font-size: 1.1rem; transition: all 0.3s ease; }
-        .nav-item.active { color: var(--primary); }
+        .nav-item i {
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
 
-        .category-pill { transition: 0.3s; white-space: nowrap; border: 1px solid #edf2f7; }
-        .category-pill.active { background: #111 !important; color: white !important; }
+        .nav-item.active {
+            color: var(--primary);
+        }
 
-        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .category-pill {
+            transition: 0.3s;
+            white-space: nowrap;
+            border: 1px solid #edf2f7;
+        }
+
+            .category-pill.active {
+                background: #111 !important;
+                color: white !important;
+            }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
 
         /* Stile Cuore */
         .heart-btn {
@@ -133,27 +168,35 @@
             transform: translateY(0);
             opacity: 1;
         }
-
     </style>
 </head>
 <body>
 
     <header class="top-bar">
         <div id="logo-container" class="h-12 flex items-center"></div>
-        <button onclick="toggleSettings()" class="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center border border-slate-100 z-[2100]">
+        <button onclick="toggleSettings(true)" class="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center border border-slate-100 z-[2100]">
             <i class="fa-solid fa-sliders text-slate-500" id="settings-icon"></i>
         </button>
     </header>
 
-    <div id="settings-page" class="fixed inset-0 bg-[#F8F9FB] z-[1500] hidden overflow-y-auto pt-24">
-        <div class="p-6">
-            <h1 class="text-3xl font-black mb-8">Impostazioni</h1>
+    <div id="settings-page" class="fixed inset-0 bg-[#F8F9FB] z-[3000] hidden overflow-y-auto">
+
+        <div class="p-6 flex items-center justify-between">
+            <h1 class="text-3xl font-black text-slate-900">Impostazioni</h1>
+
+            <button onclick="toggleSettings(false)" class="w-12 h-12 bg-white rounded-2xl shadow-sm border border-slate-100 flex items-center justify-center active:scale-90 transition-transform">
+                <i class="fa-solid fa-xmark text-slate-900"></i>
+            </button>
+        </div>
+
+        <div class="p-6 pt-0">
             <div class="bg-white rounded-[35px] p-8 shadow-sm border border-slate-100 mb-6 text-center">
                 <div class="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4 text-orange-500 text-2xl"><i class="fas fa-code"></i></div>
                 <p class="text-sm font-semibold text-slate-700">Software ideato e creato da:</p>
                 <p class="text-2xl font-black text-slate-900">Franzoni Marco</p>
                 <p class="text-xs text-slate-400 mt-4 italic">Tutti i diritti riservati © 2026</p>
             </div>
+
             <div class="bg-white rounded-[35px] p-6 shadow-sm border border-slate-100">
                 <h3 class="font-bold text-slate-400 text-[10px] uppercase tracking-widest mb-4">Informazioni Sistema</h3>
                 <div class="flex justify-between p-4 bg-slate-50 rounded-2xl mb-2">
@@ -165,6 +208,7 @@
                     <span class="text-sm font-bold text-slate-900">13 Marzo 2026</span>
                 </div>
             </div>
+
             <button onclick="toggleChangelog(true)" class="w-full bg-white rounded-[30px] p-6 border border-slate-100 flex items-center justify-between active:scale-95 transition-all mt-4">
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-500">
@@ -176,8 +220,6 @@
                     </div>
                 </div>
                 <i class="fa-solid fa-chevron-right text-slate-300"></i>
-            </button>
-            <i class="fa-solid fa-chevron-right text-slate-300"></i>
             </button>
         </div>
     </div>
@@ -261,9 +303,6 @@
         </div>
 
         <div class="p-6 pt-24 space-y-6">
-
-            // ChangeLog Argument
-
         </div>
         <div class="bg-white rounded-[35px] p-6 shadow-sm border border-slate-100">
             <div class="flex justify-between items-center mb-4">
@@ -554,71 +593,71 @@
         }
 
         async function condividiRicetta(title) {
-          if (navigator.share) {
-            try {
-            await navigator.share({ title: 'GustoSmart', text: `Guarda questa ricetta: ${title}`, url: window.location.href });
-                 } catch (err) { console.log("Errore share:", err); }
-            } else { alert("Ricetta: " + title); }
+        if (navigator.share) {
+        try {
+        await navigator.share({ title: 'GustoSmart', text: `Guarda questa ricetta: ${title}`, url: window.location.href });
+        } catch (err) { console.log("Errore share:", err); }
+        } else { alert("Ricetta: " + title); }
         }
 
         function renderIngredienti(lista) {
         const grid = document.getElementById('frigo-grid');
-            grid.innerHTML = lista.map(ing => `
-            <div class="flex flex-col items-center ing-item" data-name="${ing.n.toLowerCase()}">
-            <input type="checkbox" id="f-${ing.id}" value="${ing.id}" class="hidden ingredient-checkbox">
-            <label for="f-${ing.id}" class="round-label mb-2"><i class="fas ${ing.i} text-slate-300"></i></label>
-            <span class="text-[8px] font-bold text-slate-400 uppercase truncate w-full px-1 text-center">${ing.n}</span>
-            </div>`).join('');
+        grid.innerHTML = lista.map(ing => `
+        <div class="flex flex-col items-center ing-item" data-name="${ing.n.toLowerCase()}">
+        <input type="checkbox" id="f-${ing.id}" value="${ing.id}" class="hidden ingredient-checkbox">
+        <label for="f-${ing.id}" class="round-label mb-2"><i class="fas ${ing.i} text-slate-300"></i></label>
+        <span class="text-[8px] font-bold text-slate-400 uppercase truncate w-full px-1 text-center">${ing.n}</span>
+        </div>`).join('');
         }
 
-        function naviga(p, addHistory = true) {
-            // 1. Logica grafica originale (gestione classi active)
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.getElementById(p).classList.add('active');
+function naviga(p, addHistory = true) {
+    // Gestione pagine
+    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+    document.getElementById(p).classList.add('active');
     
-            document.querySelectorAll('.nav-item').forEach(n => {
-                if(n.id === 'nav-'+p) n.classList.add('active');
-                else n.classList.remove('active');
-            });
+    // Gestione navbar
+    document.querySelectorAll('.nav-item').forEach(n => {
+        if(n.id === 'nav-'+p) n.classList.add('active');
+        else n.classList.remove('active');
+    });
 
-            window.scrollTo(0,0);
+    window.scrollTo(0,0);
 
-            // 2. Gestione Cronologia
-            // Aggiungiamo lo stato solo se addHistory è true (per evitare loop quando torni indietro)
-            if (addHistory) {
-                history.pushState({ page: p }, "", "");
-            }
-        }
+    // Gestione cronologia per il tasto back
+    if (addHistory) {
+        history.pushState({ page: p }, "", "");
+    }
+}
 
         window.addEventListener('popstate', (event) => {
-    // Se l'utente ha dei popup aperti (Changelog, Update, ecc.), li chiudiamo prima
-    const changelog = document.getElementById('changelog-page');
-    const updatePopup = document.getElementById('update-popup');
-    
-    if (changelog && !changelog.classList.contains('hidden')) {
+        // Se l'utente ha dei popup aperti (Changelog, Update, ecc.), li chiudiamo prima
+        const changelog = document.getElementById('changelog-page');
+        const updatePopup = document.getElementById('update-popup');
+
+        if (changelog && !changelog.classList.contains('hidden')) {
         toggleChangelog(false);
         return; // Fermiamo l'evento così chiude solo il popup
-    }
+        }
 
-    if (updatePopup && !updatePopup.classList.contains('hidden')) {
+        if (updatePopup && !updatePopup.classList.contains('hidden')) {
         closeUpdatePopup();
         return;
-    }
+        }
 
-    // Se non ci sono popup, navighiamo alla pagina precedente salvata nello stato
-    if (event.state && event.state.page) {
+        // Se non ci sono popup, navighiamo alla pagina precedente salvata nello stato
+        if (event.state && event.state.page) {
         // Passiamo false come secondo argomento per non creare un nuovo record di cronologia
         naviga(event.state.page, false);
-    } else {
+        } else {
         // Se torniamo all'inizio della cronologia, forziamo la home
         naviga('home', false);
-    }
-});
+        }
+        });
 
-// Impostiamo lo stato iniziale al caricamento dell'app
-window.addEventListener('load', () => {
-    history.replaceState({ page: 'home' }, "", "");
-});
+        // Impostiamo lo stato iniziale al caricamento dell'app
+        window.addEventListener('load', () => {
+        history.replaceState({ page: 'home' }, "", "");
+        });
 
         function filtraInHome() {
         const query = document.getElementById('home-search').value.toLowerCase();
@@ -649,14 +688,21 @@ window.addEventListener('load', () => {
         renderCards(filtrate, 'home-recipes');
         }
 
-        function toggleSettings() {
-        const s = document.getElementById('settings-page');
-        const icon = document.getElementById('settings-icon');
-        const isOpen = !s.classList.contains('hidden');
-        s.classList.toggle('hidden');
-        icon.className = isOpen ? 'fa-solid fa-sliders' : 'fa-solid fa-xmark';
-        document.getElementById('bottom-nav').style.display = isOpen ? 'flex' : 'none';
-        }
+function toggleSettings(show) {
+    const settingsPage = document.getElementById('settings-page');
+    // Seleziona il contenitore del tasto "Trova Ricette" per nasconderlo
+    const btnDispensa = document.querySelector('.slide-up-button');
+
+    if (show) {
+        settingsPage.classList.remove('hidden');
+        if (btnDispensa) btnDispensa.style.display = 'none'; // Nasconde il tasto ricette
+        document.body.style.overflow = 'hidden';
+    } else {
+        settingsPage.classList.add('hidden');
+        if (btnDispensa) btnDispensa.style.display = 'block'; // Lo mostra di nuovo
+        document.body.style.overflow = '';
+    }
+}
 
         function cercaIngredienti() {
         const q = document.getElementById('ing-search').value.toLowerCase();
@@ -714,78 +760,74 @@ window.addEventListener('load', () => {
         }
 
         function toggleChangelog(show) {
-        const changelogPage = document.getElementById('changelog-page');
-        const settingsIcon = document.getElementById('settings-icon');
+    const changelogPage = document.getElementById('changelog-page');
+    const btnDispensa = document.querySelector('.slide-up-button');
 
-        if (show) {
+    if (show) {
         changelogPage.classList.remove('hidden');
-        // Nascondiamo l'icona delle impostazioni principale per non sovrapporsi
-        settingsIcon.parentElement.style.opacity = "0";
-        settingsIcon.parentElement.style.pointerEvents = "none";
-        } else {
+        if(btnDispensa) btnDispensa.style.opacity = "0";
+    } else {
         changelogPage.classList.add('hidden');
-        // Ripristiniamo il tasto impostazioni
-        settingsIcon.parentElement.style.opacity = "1";
-        settingsIcon.parentElement.style.pointerEvents = "auto";
-        }
-        }
-
-        // Versione attuale e novita testo changelog
-const CURRENT_VERSION = "1.2.0"; 
-const NEW_FEATURES = [
-    "Sistemato problema del tasto impostazioni che spariva",
-    "aggiunta di pagina ChangeLog",
-    "Aggiunta pagina Preferiti",
-    "Aggiunta barra di ricerca Home",
-    "Sistemato tasto in posizione Stiky pagina Dispensa",
-    "Aggiunta possibilità di condividere le ricette"
-];
-
-function checkUpdate() {
-    const savedVersion = localStorage.getItem('app_version');
-
-    // Se la versione salvata è diversa da quella attuale (o non esiste)
-    if (savedVersion !== CURRENT_VERSION) {
-        showUpdatePopup();
+        if(btnDispensa) btnDispensa.style.opacity = "1";
     }
 }
 
-function showUpdatePopup() {
-    const popup = document.getElementById('update-popup');
-    const card = document.getElementById('update-card');
-    const list = document.getElementById('update-features-list');
-    const versionSpan = document.getElementById('new-version-number');
+        // Versione attuale e novita testo changelog
+        const CURRENT_VERSION = "1.2.0";
+        const NEW_FEATURES = [
+        "Sistemato problema del tasto impostazioni che spariva",
+        "aggiunta di pagina ChangeLog",
+        "Aggiunta pagina Preferiti",
+        "Aggiunta barra di ricerca Home",
+        "Sistemato tasto in posizione Stiky pagina Dispensa",
+        "Aggiunta possibilità di condividere le ricette"
+        ];
 
-    // Inserisce i dati
-    versionSpan.innerText = "v" + CURRENT_VERSION;
-    list.innerHTML = NEW_FEATURES.map(feat => `
+        function checkUpdate() {
+        const savedVersion = localStorage.getItem('app_version');
+
+        // Se la versione salvata è diversa da quella attuale (o non esiste)
+        if (savedVersion !== CURRENT_VERSION) {
+        showUpdatePopup();
+        }
+        }
+
+        function showUpdatePopup() {
+        const popup = document.getElementById('update-popup');
+        const card = document.getElementById('update-card');
+        const list = document.getElementById('update-features-list');
+        const versionSpan = document.getElementById('new-version-number');
+
+        // Inserisce i dati
+        versionSpan.innerText = "v" + CURRENT_VERSION;
+        list.innerHTML = NEW_FEATURES.map(feat => `
         <div class="flex gap-3 items-start text-sm font-bold text-slate-700">
-            <i class="fa-solid fa-check text-green-500 mt-1"></i>
-            <span>${feat}</span>
+        <i class="fa-solid fa-check text-green-500 mt-1"></i>
+        <span>${feat}</span>
         </div>
-    `).join('');
+        `).join('');
 
-    // Mostra il popup con animazione
-    popup.classList.remove('hidden');
-    setTimeout(() => {
+        // Mostra il popup con animazione
+        popup.classList.remove('hidden');
+        setTimeout(() => {
         card.classList.remove('scale-90', 'opacity-0');
         card.classList.add('scale-100', 'opacity-100');
-    }, 100);
-}
+        }, 100);
+        }
 
-function closeUpdatePopup() {
-    const card = document.getElementById('update-card');
-    card.classList.add('scale-90', 'opacity-0');
-    
-    setTimeout(() => {
+        function closeUpdatePopup() {
+        const card = document.getElementById('update-card');
+        card.classList.add('scale-90', 'opacity-0');
+
+        setTimeout(() => {
         document.getElementById('update-popup').classList.add('hidden');
         // SALVA la versione nel localStorage così non apparirà più fino al prossimo update
         localStorage.setItem('app_version', CURRENT_VERSION);
-    }, 300);
-}
+        }, 300);
+        }
 
-// Avvia il controllo al caricamento della pagina
-window.addEventListener('load', checkUpdate);
+        // Avvia il controllo al caricamento della pagina
+        window.addEventListener('load', checkUpdate);
 
         window.onload = init;
     </script>
