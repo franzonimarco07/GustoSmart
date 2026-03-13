@@ -262,7 +262,7 @@
 
         <div class="p-6 pt-24 space-y-6">
 
-            //ChangeLog Argument
+            // ChangeLog Argument
 
         </div>
         <div class="bg-white rounded-[35px] p-6 shadow-sm border border-slate-100">
@@ -554,30 +554,71 @@
         }
 
         async function condividiRicetta(title) {
-        if (navigator.share) {
-        try {
-        await navigator.share({ title: 'GustoSmart', text: `Guarda questa ricetta: ${title}`, url: window.location.href });
-        } catch (err) { console.log("Errore share:", err); }
-        } else { alert("Ricetta: " + title); }
+          if (navigator.share) {
+            try {
+            await navigator.share({ title: 'GustoSmart', text: `Guarda questa ricetta: ${title}`, url: window.location.href });
+                 } catch (err) { console.log("Errore share:", err); }
+            } else { alert("Ricetta: " + title); }
         }
 
         function renderIngredienti(lista) {
         const grid = document.getElementById('frigo-grid');
-        grid.innerHTML = lista.map(ing => `
-        <div class="flex flex-col items-center ing-item" data-name="${ing.n.toLowerCase()}">
-        <input type="checkbox" id="f-${ing.id}" value="${ing.id}" class="hidden ingredient-checkbox">
-        <label for="f-${ing.id}" class="round-label mb-2"><i class="fas ${ing.i} text-slate-300"></i></label>
-        <span class="text-[8px] font-bold text-slate-400 uppercase truncate w-full px-1 text-center">${ing.n}</span>
-        </div>`).join('');
+            grid.innerHTML = lista.map(ing => `
+            <div class="flex flex-col items-center ing-item" data-name="${ing.n.toLowerCase()}">
+            <input type="checkbox" id="f-${ing.id}" value="${ing.id}" class="hidden ingredient-checkbox">
+            <label for="f-${ing.id}" class="round-label mb-2"><i class="fas ${ing.i} text-slate-300"></i></label>
+            <span class="text-[8px] font-bold text-slate-400 uppercase truncate w-full px-1 text-center">${ing.n}</span>
+            </div>`).join('');
         }
 
-        function naviga(p) {
-        document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-        document.getElementById(p).classList.add('active');
-        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-        document.getElementById('nav-'+p).classList.add('active');
-        window.scrollTo(0,0);
+        function naviga(p, addHistory = true) {
+            // 1. Logica grafica originale (gestione classi active)
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(p).classList.add('active');
+    
+            document.querySelectorAll('.nav-item').forEach(n => {
+                if(n.id === 'nav-'+p) n.classList.add('active');
+                else n.classList.remove('active');
+            });
+
+            window.scrollTo(0,0);
+
+            // 2. Gestione Cronologia
+            // Aggiungiamo lo stato solo se addHistory è true (per evitare loop quando torni indietro)
+            if (addHistory) {
+                history.pushState({ page: p }, "", "");
+            }
         }
+
+        window.addEventListener('popstate', (event) => {
+    // Se l'utente ha dei popup aperti (Changelog, Update, ecc.), li chiudiamo prima
+    const changelog = document.getElementById('changelog-page');
+    const updatePopup = document.getElementById('update-popup');
+    
+    if (changelog && !changelog.classList.contains('hidden')) {
+        toggleChangelog(false);
+        return; // Fermiamo l'evento così chiude solo il popup
+    }
+
+    if (updatePopup && !updatePopup.classList.contains('hidden')) {
+        closeUpdatePopup();
+        return;
+    }
+
+    // Se non ci sono popup, navighiamo alla pagina precedente salvata nello stato
+    if (event.state && event.state.page) {
+        // Passiamo false come secondo argomento per non creare un nuovo record di cronologia
+        naviga(event.state.page, false);
+    } else {
+        // Se torniamo all'inizio della cronologia, forziamo la home
+        naviga('home', false);
+    }
+});
+
+// Impostiamo lo stato iniziale al caricamento dell'app
+window.addEventListener('load', () => {
+    history.replaceState({ page: 'home' }, "", "");
+});
 
         function filtraInHome() {
         const query = document.getElementById('home-search').value.toLowerCase();
