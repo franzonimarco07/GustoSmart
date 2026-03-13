@@ -177,7 +177,7 @@
                 </div>
                 <i class="fa-solid fa-chevron-right text-slate-300"></i>
             </button>
-                <i class="fa-solid fa-chevron-right text-slate-300"></i>
+            <i class="fa-solid fa-chevron-right text-slate-300"></i>
             </button>
         </div>
     </div>
@@ -251,8 +251,8 @@
         <div id="modal-content"></div>
     </div>
 
+    //ChangeLog
     <div id="changelog-page" class="fixed inset-0 bg-[#F8F9FB] z-[9999] hidden overflow-y-auto">
-
         <div class="fixed top-0 left-0 right-0 h-20 bg-[#F8F9FB]/90 backdrop-blur-md flex items-center px-6 z-[10000] border-b border-slate-100">
             <button onclick="toggleChangelog(false)" class="w-12 h-12 bg-white rounded-2xl shadow-sm border border-slate-100 flex items-center justify-center active:scale-90 transition-transform">
                 <i class="fa-solid fa-chevron-left text-slate-900"></i>
@@ -262,64 +262,87 @@
 
         <div class="p-6 pt-24 space-y-6">
 
+            //ChangeLog Argument
+
+        </div>
+        <div class="bg-white rounded-[35px] p-6 shadow-sm border border-slate-100">
+            <div class="flex justify-between items-center mb-4">
+                <span class="bg-orange-500 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">v 1.2</span>
+                <span class="text-[10px] font-bold text-slate-400 uppercase">13 Mar 2026</span>
             </div>
-            <div class="bg-white rounded-[35px] p-6 shadow-sm border border-slate-100">
-                <div class="flex justify-between items-center mb-4">
-                    <span class="bg-orange-500 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">v 1.2</span>
-                    <span class="text-[10px] font-bold text-slate-400 uppercase">13 Mar 2026</span>
-                </div>
-                <ul class="space-y-3">
-                    <li class="flex gap-3 text-sm font-semibold text-slate-600">
-                        <i class="fas fa-circle text-[6px] mt-2 text-orange-500"></i>
-                        Sistemato il problema del tasto impostazioni che spariva
-                    </li>
-                    <li class="flex gap-3 text-sm font-semibold text-slate-600">
-                        <i class="fas fa-circle text-[6px] mt-2 text-orange-500"></i>
-                        Aggiunta questa pagina dedicata al Changelog
-                    </li>
-                    <li class="flex gap-3 text-sm font-semibold text-slate-600">
-                        <i class="fas fa-circle text-[6px] mt-2 text-orange-500"></i>
-                        Ottimizzato lo z-index di tutti i componenti globali
-                    </li>
-                    <li class="flex gap-3 text-sm font-semibold text-slate-600">
-                        <i class="fas fa-circle text-[6px] mt-2 text-orange-500"></i>
-                        Aggiunta pagina Preferiti con possibilità di selezione
-                    </li>
-                    <li class="flex gap-3 text-sm font-semibold text-slate-600">
-                        <i class="fas fa-circle text-[6px] mt-2 text-orange-500"></i>
-                        Aggiunta Barra di ricerca Home e sistemati filtri
-                    </li>
-                    <li class="flex gap-3 text-sm font-semibold text-slate-600">
-                        <i class="fas fa-circle text-[6px] mt-2 text-orange-500"></i>
-                        Sistemato in posizione Stiky tasto "Trova Ricette" pagina Dispensa
-                    </li>
-                    <li class="flex gap-3 text-sm font-semibold text-slate-600">
-                        <i class="fas fa-circle text-[6px] mt-2 text-orange-500"></i>
-                        Aggiuta possibilità di condividere le Ricette tramite la pagina dettagio di ogniuna delle stesse
-                    </li>
-                </ul>
+            <ul class="space-y-3">
+                <li class="flex gap-3 text-sm font-semibold text-slate-600">
+                    <i class="fas fa-circle text-[6px] mt-2 text-orange-500"></i>
+                    Sistemato il problema del tasto impostazioni che spariva
+                </li>
+                <li class="flex gap-3 text-sm font-semibold text-slate-600">
+                    <i class="fas fa-circle text-[6px] mt-2 text-orange-500"></i>
+                    Aggiunta questa pagina dedicata al Changelog
+                </li>
+                <li class="flex gap-3 text-sm font-semibold text-slate-600">
+                    <i class="fas fa-circle text-[6px] mt-2 text-orange-500"></i>
+                    Ottimizzato lo z-index di tutti i componenti globali
+                </li>
+                <li class="flex gap-3 text-sm font-semibold text-slate-600">
+                    <i class="fas fa-circle text-[6px] mt-2 text-orange-500"></i>
+                    Aggiunta pagina Preferiti con possibilità di selezione
+                </li>
+                <li class="flex gap-3 text-sm font-semibold text-slate-600">
+                    <i class="fas fa-circle text-[6px] mt-2 text-orange-500"></i>
+                    Aggiunta Barra di ricerca Home e sistemati filtri
+                </li>
+                <li class="flex gap-3 text-sm font-semibold text-slate-600">
+                    <i class="fas fa-circle text-[6px] mt-2 text-orange-500"></i>
+                    Sistemato in posizione Stiky tasto "Trova Ricette" pagina Dispensa
+                </li>
+                <li class="flex gap-3 text-sm font-semibold text-slate-600">
+                    <i class="fas fa-circle text-[6px] mt-2 text-orange-500"></i>
+                    Aggiuta possibilità di condividere le Ricette tramite la pagina dettagio di ogniuna delle stesse
+                </li>
+            </ul>
+        </div>
+        <div class="bg-white rounded-[35px] p-6 shadow-sm border border-slate-100 opacity-60">
+            <div class="flex justify-between items-center mb-4">
+                <span class="bg-slate-200 text-slate-500 text-[10px] font-black px-3 py-1 rounded-full uppercase">v 1.1</span>
+                <span class="text-[10px] font-bold text-slate-400 uppercase">12 Mar 2026</span>
             </div>
-                    <div class="bg-white rounded-[35px] p-6 shadow-sm border border-slate-100 opacity-60">
-                <div class="flex justify-between items-center mb-4">
-                  <span class="bg-slate-200 text-slate-500 text-[10px] font-black px-3 py-1 rounded-full uppercase">v 1.1</span>
-                    <span class="text-[10px] font-bold text-slate-400 uppercase">12 Mar 2026</span>
-                </div>
-                <ul class="space-y-3">
-                    <li class="flex gap-3 text-sm font-medium text-slate-500">
-                        <i class="fas fa-circle text-[6px] mt-2"></i>
-                        Rilascio Ufficiale Gusto Smart
-                    </li>
-                    <li class="flex gap-3 text-sm font-medium text-slate-500">
-                        <i class="fas fa-circle text-[6px] mt-2"></i>
-                        Prima release ufficiale della sezione Dispensa
-                    </li>
-                    <li class="flex gap-3 text-sm font-medium text-slate-500">
-                        <i class="fas fa-circle text-[6px] mt-2"></i>
-                        Rilascio WebApp Installabile
-                    </li>
-                </ul>
+            <ul class="space-y-3">
+                <li class="flex gap-3 text-sm font-medium text-slate-500">
+                    <i class="fas fa-circle text-[6px] mt-2"></i>
+                    Rilascio Ufficiale Gusto Smart
+                </li>
+                <li class="flex gap-3 text-sm font-medium text-slate-500">
+                    <i class="fas fa-circle text-[6px] mt-2"></i>
+                    Prima release ufficiale della sezione Dispensa
+                </li>
+                <li class="flex gap-3 text-sm font-medium text-slate-500">
+                    <i class="fas fa-circle text-[6px] mt-2"></i>
+                    Rilascio WebApp Installabile
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    </div>
+
+    //PopUp Changelog
+    <div id="update-popup" class="fixed inset-0 z-[10001] hidden flex items-center justify-center px-6">
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+
+        <div class="bg-white w-full max-w-sm rounded-[40px] p-8 relative z-10 shadow-2xl scale-90 opacity-0 transition-all duration-300" id="update-card">
+            <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center text-orange-500 text-2xl mb-6 mx-auto">
+                <i class="fa-solid fa-rocket"></i>
             </div>
 
+            <h3 class="text-2xl font-black text-center text-slate-900 mb-2">Nuovo Aggiornamento!</h3>
+            <p class="text-center text-slate-500 text-sm mb-6">Abbiamo appena installato la versione <span id="new-version-number" class="font-bold text-orange-600"></span>. Ecco cosa c'è di nuovo:</p>
+
+            <div id="update-features-list" class="space-y-3 mb-8">
+            </div>
+
+            <button onclick="closeUpdatePopup()" class="w-full bg-[#111] text-white font-black py-5 rounded-2xl shadow-lg active:scale-95 transition-transform text-xs uppercase tracking-widest">
+                Andiamo!
+            </button>
         </div>
     </div>
 
@@ -602,7 +625,7 @@
         function filtraPerFrigo() {
         // 1. Recupera gli ingredienti selezionati
         let sel = Array.from(document.querySelectorAll('.ingredient-checkbox:checked')).map(cb => cb.value.toLowerCase());
-    
+
         // Se non c'è nulla di selezionato, torna alla home normale
         if(!sel.length) return naviga('home');
 
@@ -665,6 +688,63 @@
         settingsIcon.parentElement.style.pointerEvents = "auto";
         }
         }
+
+        // Versione attuale e novita testo changelog
+const CURRENT_VERSION = "2.2.4"; 
+const NEW_FEATURES = [
+    "Sistemato problema del tasto impostazioni che spariva",
+    "aggiunta di pagina ChangeLog",
+    "Aggiunta pagina Preferiti",
+    "Aggiunta barra di ricerca Home",
+    "Sistemato tasto in posizione Stiky pagina Dispensa",
+    "Aggiunta possibilità di condividere le ricette"
+];
+
+function checkUpdate() {
+    const savedVersion = localStorage.getItem('app_version');
+
+    // Se la versione salvata è diversa da quella attuale (o non esiste)
+    if (savedVersion !== CURRENT_VERSION) {
+        showUpdatePopup();
+    }
+}
+
+function showUpdatePopup() {
+    const popup = document.getElementById('update-popup');
+    const card = document.getElementById('update-card');
+    const list = document.getElementById('update-features-list');
+    const versionSpan = document.getElementById('new-version-number');
+
+    // Inserisce i dati
+    versionSpan.innerText = "v" + CURRENT_VERSION;
+    list.innerHTML = NEW_FEATURES.map(feat => `
+        <div class="flex gap-3 items-start text-sm font-bold text-slate-700">
+            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+            <span>${feat}</span>
+        </div>
+    `).join('');
+
+    // Mostra il popup con animazione
+    popup.classList.remove('hidden');
+    setTimeout(() => {
+        card.classList.remove('scale-90', 'opacity-0');
+        card.classList.add('scale-100', 'opacity-100');
+    }, 100);
+}
+
+function closeUpdatePopup() {
+    const card = document.getElementById('update-card');
+    card.classList.add('scale-90', 'opacity-0');
+    
+    setTimeout(() => {
+        document.getElementById('update-popup').classList.add('hidden');
+        // SALVA la versione nel localStorage così non apparirà più fino al prossimo update
+        localStorage.setItem('app_version', CURRENT_VERSION);
+    }, 300);
+}
+
+// Avvia il controllo al caricamento della pagina
+window.addEventListener('load', checkUpdate);
 
         window.onload = init;
     </script>
