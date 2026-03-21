@@ -1,0 +1,15 @@
+name: Supabase Keep Alive
+on:
+  schedule:
+    - cron: '0 0 * * *' # Viene eseguito ogni notte a mezzanotte
+  workflow_dispatch: # Questo ti permette di avviarlo a mano per testare
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase
+        run: |
+          curl -X GET "https://zfbwvzrcspweulozvkli.supabase.co/rest/v1/recipes?select=id&limit=1" \
+          -H "apikey: ${{ secrets.SUPABASE_KEY }}" \
+          -H "Authorization: Bearer ${{ secrets.SUPABASE_KEY }}"
