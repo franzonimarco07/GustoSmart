@@ -201,11 +201,11 @@
                 <h3 class="font-bold text-slate-400 text-[10px] uppercase tracking-widest mb-4">Informazioni Sistema</h3>
                 <div class="flex justify-between p-4 bg-slate-50 rounded-2xl mb-2">
                     <span class="text-sm font-bold text-slate-500">Versione</span>
-                    <span class="text-sm font-black text-orange-600">1.2.0</span>
+                    <span class="text-sm font-black text-orange-600">1.2.1</span>
                 </div>
                 <div class="flex justify-between p-4 bg-slate-50 rounded-2xl">
                     <span class="text-sm font-bold text-slate-500">Ultimo Update</span>
-                    <span class="text-sm font-bold text-slate-900">13 Marzo 2026</span>
+                    <span class="text-sm font-bold text-slate-900">21 Marzo 2026</span>
                 </div>
             </div>
 
@@ -305,7 +305,35 @@
         </div>
         <div class="bg-white rounded-[35px] p-6 shadow-sm border border-slate-100">
             <div class="flex justify-between items-center mb-4">
-                <span class="bg-orange-500 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">v 1.2.0</span>
+                <span class="bg-orange-500 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">v 1.2.1</span>
+                <span class="text-[10px] font-bold text-slate-400 uppercase">21 Mar 2026</span>
+            </div>
+            <ul class="space-y-3">
+                <li class="flex gap-3 text-sm font-semibold text-slate-600">
+                    <i class="fas fa-circle text-[6px] mt-2 text-orange-500"></i>
+                    Aggiunte 40+ Ricette
+                </li>
+                <li class="flex gap-3 text-sm font-semibold text-slate-600">
+                    <i class="fas fa-circle text-[6px] mt-2 text-orange-500"></i>
+                    Aggiunto Bottone Reset per filtri Frigo
+                </li>
+                <li class="flex gap-3 text-sm font-semibold text-slate-600">
+                    <i class="fas fa-circle text-[6px] mt-2 text-orange-500"></i>
+                    Ottimizzati tutti i componenti globali
+                </li>
+                <li class="flex gap-3 text-sm font-semibold text-slate-600">
+                    <i class="fas fa-circle text-[6px] mt-2 text-orange-500"></i>
+                    Implementato history.pushState da ora la freccia "Back" dell'OS' non chiudera più l'applicazione'
+                </li>
+                <li class="flex gap-3 text-sm font-semibold text-slate-600">
+                    <i class="fas fa-circle text-[6px] mt-2 text-orange-500"></i>
+                    Ottimizzato il Sync di tutti i componenti globali
+                </li>
+            </ul>
+        </div>
+        <div class="bg-white rounded-[35px] p-6 shadow-sm border border-slate-100 opacity-60">
+            <div class="flex justify-between items-center mb-4">
+                <span class="bg-slate-200 text-slate-500 text-[10px] font-black px-3 py-1 rounded-full uppercase">v 1.2.0</span>
                 <span class="text-[10px] font-bold text-slate-400 uppercase">13 Mar 2026</span>
             </div>
             <ul class="space-y-3">
@@ -341,7 +369,7 @@
         </div>
         <div class="bg-white rounded-[35px] p-6 shadow-sm border border-slate-100 opacity-60">
             <div class="flex justify-between items-center mb-4">
-                <span class="bg-slate-200 text-slate-500 text-[10px] font-black px-3 py-1 rounded-full uppercase">v 1.1</span>
+                <span class="bg-slate-200 text-slate-500 text-[10px] font-black px-3 py-1 rounded-full uppercase">v 1.1.0</span>
                 <span class="text-[10px] font-bold text-slate-400 uppercase">12 Mar 2026</span>
             </div>
             <ul class="space-y-3">
@@ -516,74 +544,74 @@
         }).join('');
         }
 
-function apriRicetta(id) {
-    const r = tutteLeRicette.find(item => item.id == id);
-    if(!r) return;
-    const isFav = preferiti.includes(r.id.toString());
+        function apriRicetta(id) {
+        const r = tutteLeRicette.find(item => item.id == id);
+        if(!r) return;
+        const isFav = preferiti.includes(r.id.toString());
 
-    // --- AGGIUNTA CRONOLOGIA ---
-    history.pushState({ popup: 'recipe-detail' }, "", "");
-    // ---------------------------
+        // --- AGGIUNTA CRONOLOGIA ---
+        history.pushState({ popup: 'recipe-detail' }, "", "");
+        // ---------------------------
 
-    document.getElementById('bottom-nav').style.display = 'none'; 
-    document.getElementById('recipe-modal').classList.remove('hidden');
-    document.getElementById('modal-content').innerHTML = `
-    <div class="fixed top-6 left-6 z-[3100]">
+        document.getElementById('bottom-nav').style.display = 'none';
+        document.getElementById('recipe-modal').classList.remove('hidden');
+        document.getElementById('modal-content').innerHTML = `
+        <div class="fixed top-6 left-6 z-[3100]">
         <button onclick="chiudiRicetta()" class="bg-white/80 backdrop-blur-md w-12 h-12 rounded-full flex items-center justify-center text-black shadow-lg active:scale-90 transition-all">
-            <i class="fa-solid fa-chevron-left"></i>
+        <i class="fa-solid fa-chevron-left"></i>
         </button>
-    </div>
-    <div class="fixed top-6 right-6 z-[3100] flex gap-3">
+        </div>
+        <div class="fixed top-6 right-6 z-[3100] flex gap-3">
         <button onclick="condividiRicetta('${r.title.replace(/'/g, "\\'")}')" class="bg-white/80 backdrop-blur-md w-12 h-12 rounded-full flex items-center justify-center text-black shadow-lg active:scale-90 transition-all">
-            <i class="fa-solid fa-share-nodes"></i>
+        <i class="fa-solid fa-share-nodes"></i>
         </button>
         <button onclick="toggleLike('${r.id}', event)" class="bg-white/80 backdrop-blur-md w-12 h-12 rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-all">
-            <i class="${isFav ? 'fa-solid text-red-500' : 'fa-regular text-slate-400'} fa-heart"></i>
+        <i class="${isFav ? 'fa-solid text-red-500' : 'fa-regular text-slate-400'} fa-heart"></i>
         </button>
-    </div>
-    <div class="relative h-[450px]">
+        </div>
+        <div class="relative h-[450px]">
         <img src="${r.image_url}" class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
         <div class="absolute bottom-12 px-8">
-            <p class="text-orange-400 font-bold text-xs uppercase tracking-widest mb-2">${r.category || 'Ricetta'}</p>
-            <h2 class="text-4xl font-black text-white leading-tight">${r.title}</h2>
+        <p class="text-orange-400 font-bold text-xs uppercase tracking-widest mb-2">${r.category || 'Ricetta'}</p>
+        <h2 class="text-4xl font-black text-white leading-tight">${r.title}</h2>
         </div>
-    </div>
-    <div class="px-8 pb-20 pt-10 bg-white rounded-t-[40px] -mt-10 relative z-10">
+        </div>
+        <div class="px-8 pb-20 pt-10 bg-white rounded-t-[40px] -mt-10 relative z-10">
         <div class="flex gap-4 mb-10">
-            <div class="flex-1 bg-slate-50 p-5 rounded-[30px] text-center border border-slate-100">
-                <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1">Preparazione</p>
-                <p class="font-black">${r.prep_time}</p>
-            </div>
-            <div class="flex-1 bg-slate-50 p-5 rounded-[30px] text-center border border-slate-100">
-                <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1">Dosi</p>
-                <p class="font-black">${r.servings || 2} Pers.</p>
-            </div>
+        <div class="flex-1 bg-slate-50 p-5 rounded-[30px] text-center border border-slate-100">
+        <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1">Preparazione</p>
+        <p class="font-black">${r.prep_time}</p>
+        </div>
+        <div class="flex-1 bg-slate-50 p-5 rounded-[30px] text-center border border-slate-100">
+        <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1">Dosi</p>
+        <p class="font-black">${r.servings || 2} Pers.</p>
+        </div>
         </div>
         <h3 class="text-xl font-black mb-6">Ingredienti</h3>
         <div class="space-y-3 mb-10">
-            ${(r.ingredients || []).map(i => `
-            <div class="bg-slate-50 p-5 rounded-2xl font-bold text-sm flex items-center gap-4 border border-slate-100">
-                <div class="w-2 h-2 bg-orange-500 rounded-full"></div> ${i}
-            </div>
-            `).join('')}
+        ${(r.ingredients || []).map(i => `
+        <div class="bg-slate-50 p-5 rounded-2xl font-bold text-sm flex items-center gap-4 border border-slate-100">
+        <div class="w-2 h-2 bg-orange-500 rounded-full"></div> ${i}
+        </div>
+        `).join('')}
         </div>
         <h3 class="text-xl font-black mb-4">Istruzioni</h3>
         <p class="text-slate-500 leading-relaxed whitespace-pre-wrap pb-10">${r.description}</p>
-    </div>`;
-}
+        </div>`;
+        }
 
-function chiudiRicetta() {
-    document.getElementById('recipe-modal').classList.add('hidden');
-    document.getElementById('bottom-nav').style.display = 'flex';
+        function chiudiRicetta() {
+        document.getElementById('recipe-modal').classList.add('hidden');
+        document.getElementById('bottom-nav').style.display = 'flex';
 
-    // --- AGGIUNTA CRONOLOGIA ---
-    // Se l'utente chiude col tasto X (chevron-left), dobbiamo dire al browser 
-    // di tornare indietro di uno, altrimenti il "fantasma" del pushState resta lì
-    if (history.state?.popup === 'recipe-detail') {
+        // --- AGGIUNTA CRONOLOGIA ---
+        // Se l'utente chiude col tasto X (chevron-left), dobbiamo dire al browser
+        // di tornare indietro di uno, altrimenti il "fantasma" del pushState resta lì
+        if (history.state?.popup === 'recipe-detail') {
         history.back();
-    }
-}
+        }
+        }
 
         function toggleLike(id, event) {
         if(event) event.stopPropagation();
@@ -618,24 +646,24 @@ function chiudiRicetta() {
         </div>`).join('');
         }
 
-function naviga(p, addHistory = true) {
-    // Gestione pagine
-    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-    document.getElementById(p).classList.add('active');
-    
-    // Gestione navbar
-    document.querySelectorAll('.nav-item').forEach(n => {
+        function naviga(p, addHistory = true) {
+        // Gestione pagine
+        document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+        document.getElementById(p).classList.add('active');
+
+        // Gestione navbar
+        document.querySelectorAll('.nav-item').forEach(n => {
         if(n.id === 'nav-'+p) n.classList.add('active');
         else n.classList.remove('active');
-    });
+        });
 
-    window.scrollTo(0,0);
+        window.scrollTo(0,0);
 
-    // Gestione cronologia per il tasto back
-    if (addHistory) {
+        // Gestione cronologia per il tasto back
+        if (addHistory) {
         history.pushState({ page: p }, "", "");
-    }
-}
+        }
+        }
 
         window.addEventListener('popstate', (event) => {
         // Se l'utente ha dei popup aperti (Changelog, Update, ecc.), li chiudiamo prima
@@ -696,21 +724,21 @@ function naviga(p, addHistory = true) {
         renderCards(filtrate, 'home-recipes');
         }
 
-function toggleSettings(show) {
-    const settingsPage = document.getElementById('settings-page');
-    // Seleziona il contenitore del tasto "Trova Ricette" per nasconderlo
-    const btnDispensa = document.querySelector('.slide-up-button');
+        function toggleSettings(show) {
+        const settingsPage = document.getElementById('settings-page');
+        // Seleziona il contenitore del tasto "Trova Ricette" per nasconderlo
+        const btnDispensa = document.querySelector('.slide-up-button');
 
-    if (show) {
+        if (show) {
         settingsPage.classList.remove('hidden');
         if (btnDispensa) btnDispensa.style.display = 'none'; // Nasconde il tasto ricette
         document.body.style.overflow = 'hidden';
-    } else {
+        } else {
         settingsPage.classList.add('hidden');
         if (btnDispensa) btnDispensa.style.display = 'block'; // Lo mostra di nuovo
         document.body.style.overflow = '';
-    }
-}
+        }
+        }
 
         function cercaIngredienti() {
         const q = document.getElementById('ing-search').value.toLowerCase();
@@ -768,27 +796,26 @@ function toggleSettings(show) {
         }
 
         function toggleChangelog(show) {
-    const changelogPage = document.getElementById('changelog-page');
-    const btnDispensa = document.querySelector('.slide-up-button');
+        const changelogPage = document.getElementById('changelog-page');
+        const btnDispensa = document.querySelector('.slide-up-button');
 
-    if (show) {
+        if (show) {
         changelogPage.classList.remove('hidden');
         if(btnDispensa) btnDispensa.style.opacity = "0";
-    } else {
+        } else {
         changelogPage.classList.add('hidden');
         if(btnDispensa) btnDispensa.style.opacity = "1";
-    }
-}
+        }
+        }
 
         // Versione attuale e novita testo changelog
-        const CURRENT_VERSION = "1.2.0";
+        const CURRENT_VERSION = "1.2.1";
         const NEW_FEATURES = [
-        "Sistemato problema del tasto impostazioni che spariva",
-        "aggiunta di pagina ChangeLog",
-        "Aggiunta pagina Preferiti",
-        "Aggiunta barra di ricerca Home",
-        "Sistemato tasto in posizione Stiky pagina Dispensa",
-        "Aggiunta possibilità di condividere le ricette"
+        "Aggiunte 40+ Ricette",
+        "Aggiunto Bottone Reset per filtri Frigo",
+        "Ottimizzati tutti i componenti globali",
+        "Implementato history.pushState per tasto BACK di OS",
+        "Ottimizzato il Sync di tutti i componenti globali"
         ];
 
         function checkUpdate() {
@@ -838,29 +865,29 @@ function toggleSettings(show) {
         window.addEventListener('load', checkUpdate);
 
         window.addEventListener('popstate', (event) => {
-    const modalRicetta = document.getElementById('recipe-modal');
-    const settingsPage = document.getElementById('settings-page');
+        const modalRicetta = document.getElementById('recipe-modal');
+        const settingsPage = document.getElementById('settings-page');
 
-    // Se il dettaglio ricetta è aperto, chiudilo (senza richiamare history.back() perché ci siamo già)
-    if (modalRicetta && !modalRicetta.classList.contains('hidden')) {
+        // Se il dettaglio ricetta è aperto, chiudilo (senza richiamare history.back() perché ci siamo già)
+        if (modalRicetta && !modalRicetta.classList.contains('hidden')) {
         modalRicetta.classList.add('hidden');
         document.getElementById('bottom-nav').style.display = 'flex';
         return;
-    }
+        }
 
-    // Se le impostazioni sono aperte, chiudile
-    if (settingsPage && !settingsPage.classList.contains('hidden')) {
+        // Se le impostazioni sono aperte, chiudile
+        if (settingsPage && !settingsPage.classList.contains('hidden')) {
         toggleSettings(false);
         return;
-    }
+        }
 
-    // Altrimenti gestisci la navigazione tra le pagine (Home, Dispensa, ecc)
-    if (event.state && event.state.page) {
+        // Altrimenti gestisci la navigazione tra le pagine (Home, Dispensa, ecc)
+        if (event.state && event.state.page) {
         naviga(event.state.page, false);
-    } else {
+        } else {
         naviga('home', false);
-    }
-});
+        }
+        });
 
         window.onload = init;
     </script>
